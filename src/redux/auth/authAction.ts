@@ -1,8 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { APIClient } from "./../../helpers/api_helper";
-import { AxiosError, isAxiosError } from "axios";
+import { isAxiosError } from "axios";
 import * as url from "../../helpers/url_helper";
-// import { result } from "./domeData";
 
 const api = new APIClient();
 
@@ -16,10 +15,7 @@ export const loginUser = createAsyncThunk(
   async (loginData: LoginArgument, { rejectWithValue }) => {
     try {
       const { data } = await api.create(url.POST_LOGIN, loginData.loginData);
-      if (data?.data?.length === 0) {
-        loginData.cb();
-      }
-      localStorage.setItem("authUser", JSON.stringify(data?.data));
+      localStorage.setItem("authUser", JSON.stringify(data?.data?.User));
       return data;
     } catch (error) {
       if (isAxiosError(error)) {
@@ -30,31 +26,8 @@ export const loginUser = createAsyncThunk(
 );
 
 
-interface forgetPassArgument {
-  email: {};
-  cb: () => void;
-}
-
-// POST/GORGET PASSWORD ACTION
-export const forgetPassAction = async (forgetPass: forgetPassArgument) => {
-  try {
-    const { data } = await api.create(
-      url.POST_FORGET_PASSWORD,
-      forgetPass?.email
-    );
-    forgetPass?.cb();
-    return data;
-  } catch (error) {
-    const axiosError = error as AxiosError;
-    if (axiosError?.response) {
-      return axiosError?.response?.data;
-    }
-    throw error;
-  }
-};
-
 // GET/RESET LOGOUT TOKEN ACTION
-export const logoutUser = createAsyncThunk(
+export const logoutUser = createAsyncThunk<any>(
   "auth/logoutUser",
   async (_, { rejectWithValue }) => {
     try {
@@ -84,7 +57,3 @@ export const fetchUserInfoAction = createAsyncThunk(
     }
   }
 );
-
-interface userInfoDataType {
-  [key: string]: any;
-}

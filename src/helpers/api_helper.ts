@@ -7,7 +7,7 @@ import { resetUser } from "../redux/auth/authSlice";
 const appAxios = axios;
 
 // default
-appAxios.defaults.baseURL = 'REACT_APP_URL';
+appAxios.defaults.baseURL = 'http://localhost';
 // content type
 appAxios.defaults.headers.post["Content-Type"] = "application/json";
 

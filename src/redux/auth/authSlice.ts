@@ -6,7 +6,7 @@ import {
 } from "./authAction"; // You should import the correct type for UserData
 
 interface AuthData {
-  Login: { [key: string]: string };
+  [key: string]: string
 }
 
 interface InitialStateUserInfoType {

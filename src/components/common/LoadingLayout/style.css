@@ -1,0 +1,12 @@
+@tailwind components;
+
+@layer components {
+  .loading-layout {
+    @apply w-full
+      h-full
+      min-h-[40vh]
+      flex
+      justify-center
+      items-center;
+  }
+}

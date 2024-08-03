@@ -1,12 +1,9 @@
-import Login from "./components/login"
+import { Routs } from "./Routes";
 
 function App() {
 
-  return (
-    <>
-     <Login/>
-    </>
-  )
+  return <Routs />;
+
 }
 
 export default App
